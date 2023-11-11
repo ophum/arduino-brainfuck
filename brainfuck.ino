@@ -55,7 +55,7 @@ byte mem[MEMCOUNT] = {};
 byte pointer = 0;
 
 const byte OUTPUTSIZE = 5;
-char output[OUTPUTSIZE] = "";
+char output[OUTPUTSIZE+1] = "";
 int outputIndex = 0;
 
 int runIndex = 0;
@@ -153,7 +153,7 @@ void run() {
     }
     resetScreen();
     writeScreen(0, 0, displayMemoryString());
-    writeScreen(1, 0, displayOutputString(i));
+    writeScreen(1, 0, displayOutputString(runIndex));
     flushScreen();
     delay(DELAY);
   }
@@ -186,9 +186,12 @@ void reset() {
   }
   programIndex = 0;
   runIndex = 0;
+  outputIndex = 0;
+  pointer = 0;
   for (int i = 0; i < MEMCOUNT; i++) {
     mem[i] = 0;
   }
+
   resetScreen();
   writeScreen(0, 0, "reset: done");
   flushScreen();
